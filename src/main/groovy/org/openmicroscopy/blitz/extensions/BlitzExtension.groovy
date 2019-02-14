@@ -6,42 +6,66 @@ class BlitzExtension {
 
     static final def COMBINED_FILES_DIR = "combined"
 
+    static final def OME_XML_FILES_DIR = "extracted"
+
     final Project project
 
-    File combinedPath
+    String databaseType
 
-    File outputPath
+    File combinedDir
 
-    void setCombinedPath(String dir) {
-        this.combinedPath = new File(dir)
-    }
-    
-    void setOutputPath(String dir) {
-        setOutputPath(new File(dir))
-    }
+    File omeXmlDir
 
-    void setOutputPath(File path) {
-        if (!path.isAbsolute()) {
-            outputPath = project.file(path)
-        } else {
-            outputPath = path
-        }
-    }
+    File outputDir
 
-    void combinedPath(String dir) {
-        setCombinedPath(dir)
-    }
+    File template
 
-    void outputPath(String dir) {
-        setOutputPath(dir)
-    }
-
-    void outputPath(File dir) {
-        setOutputPath(dir)
-    }
+    String modelVersion
 
     BlitzExtension(Project project) {
         this.project = project
-        this.combinedPath = project.file("${project.buildDir}/${COMBINED_FILES_DIR}")
+        this.combinedDir = project.file("${project.buildDir}/${COMBINED_FILES_DIR}")
+        this.omeXmlDir = project.file("${project.buildDir}/$OME_XML_FILES_DIR")
     }
+
+    void databaseType(String type) {
+        databaseType = type
+    }
+
+    void setCombinedDir(Object dir) {
+        combinedDir = project.file(dir)
+    }
+
+    void setOmeXmlDir(Object dir) {
+        outputDir = project.file(dir)
+    }
+
+    void setOutputDir(Object dir) {
+        outputDir = project.file(dir)
+    }
+
+    void combinedDir(Object dir) {
+        setCombinedDir(dir)
+    }
+
+    void omeXmlDir(Object dir) {
+        setOmeXmlDir(dir)
+    }
+
+    void outputDir(Object dir) {
+        setOutputDir(dir)
+    }
+
+    void setTemplate(Object p) {
+        template = project.file(p)
+    }
+
+    void template(Object p) {
+        setTemplate(p)
+    }
+
+    void modelVersion(String version) {
+        modelVersion = version
+    }
+
 }
